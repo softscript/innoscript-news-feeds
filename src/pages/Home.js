@@ -29,22 +29,22 @@ const Home = () => {
   const [categoryLoading, setCategoryLoading] = useState(false);
   const [categoryWiseData, setCategoryWiseData] = useState({});
   const [newsFeeds, setNewsFeeds] = useState([]);
-  const [newsSource, setNewsSource] = useState("nytimes");
+  const [newsSource, setNewsSource] = useState("theguardian");
   const [apiError, setApiError] = useState({});
   const [queryParams, setQueryParams] = useState({
     q: "",
     date: "",
-    source: "nytimes",
+    source: "theguardian",
     fq: [],
     tags: [],
   });
-  const getPersonalisedTags = (source = "nytimes") => {
+  const getPersonalisedTags = (source = "theguardian") => {
     const apiDetails = apiConfig.find((api) => api.name === source);
     setPersonalisedChips(apiDetails.categories);
     return apiDetails.categories;
   };
 
-  const makeCategoryApiWiseReq = async (source = "nytimes") => {
+  const makeCategoryApiWiseReq = async (source = "theguardian") => {
     setCategoryLoading(true);
     if (!categoryWiseData[source]) {
       try {
@@ -69,7 +69,7 @@ const Home = () => {
     setCategoryLoading(false);
   };
 
-  const makeApiRequest = async (source = "nytimes") => {
+  const makeApiRequest = async (source = "theguardian") => {
     setLoading(true);
     try {
       switch (source) {
