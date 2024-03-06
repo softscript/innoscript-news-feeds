@@ -162,7 +162,7 @@ const Home = () => {
         await makeApiRequest(queryParams.source);
       }
       fetchData();
-    }, 2000);
+    }, 1000);
   };
 
   const handleCloseSnackBar = () => {
@@ -170,7 +170,12 @@ const Home = () => {
   }
 
   const handlePersanilsedTags = async (key) => {
-    const personalisedTags = [...personalisedChips];
+    let personalisedTags = [...personalisedChips].map(item => {
+      return {
+        ...item,
+        isSelected: false
+      }
+    });
     const indexValue = personalisedTags.findIndex(({ value }) => value === key);
     const tagDetails = personalisedTags[indexValue];
     tagDetails.isSelected = !tagDetails.isSelected;
@@ -178,6 +183,7 @@ const Home = () => {
     setPersonalisedChips(personalisedTags);
     const params = { ...queryParams };
     const selectedTags = [];
+
     personalisedTags.forEach((tag) => {
       if (tag.isSelected) {
         selectedTags.push(tag.value);
@@ -205,19 +211,19 @@ const Home = () => {
         justifyContent="center"
         spacing={3}
       >
-        <Grid sm={2} item xs={12}>
+        <Grid className="app-wrapper__item" sm={2} item xs={12}>
           <FilterComponent
             handleSearch={handleSearch}
             filterData={queryParams}
           />
         </Grid>
-        <StyledMobilePersonaliseSec sm={2} item xs={12}>
+        <StyledMobilePersonaliseSec className="app-wrapper__item" sm={2} item xs={12}>
           <PersonalisedChips
             tags={personalisedChips}
             handleSelect={handlePersanilsedTags}
           />
         </StyledMobilePersonaliseSec>
-        <Grid item xs={12} sm={8}>
+        <Grid className="app-wrapper__item" item xs={12} sm={8}>
           {loading ? (
             <Loader />
           ) : (
@@ -226,7 +232,7 @@ const Home = () => {
                 <SectionOne className="main-section_one" data={newsFeeds} />
               )}
 
-              <SectionTwo videos={dataSource.videos} />
+              <SectionTwo  videos={dataSource.videos} />
               {newsFeeds && newsFeeds.length > 0 && (
                 <SectionThree data={newsFeeds} />
               )}
@@ -243,7 +249,7 @@ const Home = () => {
             </MainContentWrapper>
           )}
         </Grid>
-        <StyledPersonaliseSec sm={2} item xs={12}>
+        <StyledPersonaliseSec className="app-wrapper__item" sm={2} item xs={12}>
           <PersonalisedChips
             tags={personalisedChips}
             handleSelect={handlePersanilsedTags}

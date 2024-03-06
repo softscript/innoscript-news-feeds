@@ -8,11 +8,13 @@ import Typography from "@mui/material/Typography";
 import { Divider } from "@mui/material";
 import moment from "moment";
 
-
 import { FilterWrapper, CustomInput, TitleSection } from "./styles";
 import { apiConfig as newsSource } from "../../config";
 
 export default function FilterComponent({ filterData, handleSearch }) {
+  const maxDate = moment(new Date()).format("YYYY-MM-DD");
+  const minDate = moment(new Date()).subtract(15, "days").format("YYYY-MM-DD");
+
   return (
     <FilterWrapper>
       <TitleSection>
@@ -20,7 +22,7 @@ export default function FilterComponent({ filterData, handleSearch }) {
           Filter feeds
         </Typography>
       </TitleSection>
-      <Divider sx={{mb:3}}/>
+      <Divider sx={{ mb: 3 }} />
       <Box
         component="form"
         sx={{
@@ -40,15 +42,17 @@ export default function FilterComponent({ filterData, handleSearch }) {
           onChange={(event) => handleSearch(event)}
         />
         <CustomInput
+          InputProps={{ inputProps: { min: minDate, max: maxDate } }}
           className="filter-by-date"
           id="outlined-basic"
           label="dd/mm/yyyy"
           variant="outlined"
           name="date"
           placeholder=""
-          value={filterData.date || moment()}
+          value={filterData.date || maxDate}
           type="date"
           onChange={(event) => handleSearch(event)}
+          max-date="07-03-2024"
         />
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Source</InputLabel>

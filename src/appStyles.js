@@ -3,7 +3,19 @@ import { styled } from "@mui/system";
 
 export const AppWrapperContainer = styled(Grid)`
   width: 100%;
-  margin: 10rem 0 0 0;
+
+  ${(props) => props.theme.breakpoints.up("sm")} {
+    margin: 8rem 0 0 0;
+    .app-wrapper__item {
+      padding: 1rem 
+    }
+  }
+  ${(props) => props.theme.breakpoints.down("sm")} {
+    margin: 5rem 0 0 0;
+    .app-wrapper__item {
+      padding: 0.5rem 
+    }
+  }
 `;
 
 export const MainContentWrapper = styled("div")``;
