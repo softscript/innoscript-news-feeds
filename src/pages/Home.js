@@ -250,7 +250,7 @@ const Home = () => {
           />
         </StyledPersonaliseSec>
       </AppWrapperContainer>
-      {apiError.hasError && <Notification  handleClose = {handleCloseSnackBar} apiError={apiError}/>}
+      {apiError?.hasError && <Notification  handleClose = {handleCloseSnackBar} apiError={apiError}/>}
     </>
   );
 };

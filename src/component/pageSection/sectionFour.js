@@ -3,13 +3,10 @@ import Grid from "@mui/material/Grid";
 import CardMediaAbove from "../customCard/cardMediaAbove";
 import Aside from "../aside";
 import { transformAsideData } from "../../helper/transformAsideData";
-// import Loader from "../component/loader/loader";
 
 
 export default function SectionFour({ loading, categoryData, newsSource }) {
   const {cardData = [], asideNewsList = []} = transformAsideData(newsSource, categoryData);
-  console.log('---4sec--loading', loading)
-
 
   return (
     <>
